@@ -1,0 +1,39 @@
+{
+  "generator-jhipster": {
+    "applicationType": "monolith",
+    "gitCompany": "",
+    "baseName": "fenetrePMEv2",
+    "packageName": "com.solenboutique.fenetre_pme_v2",
+    "packageFolder": "com/solenboutique/fenetre_pme_v2",
+    "serverPort": 8080,
+    "serviceDiscoveryType": false,
+    "authenticationType": "session",
+    "uaaBaseName": "../uaa",
+    "cacheProvider": "ehcache",
+    "enableHibernateCache": true,
+    "websocket": false,
+    "databaseType": "sql",
+    "devDatabaseType": "mysql",
+    "prodDatabaseType": "mysql",
+    "searchEngine": false,
+    "enableSwaggerCodegen": false,
+    "messageBroker": false,
+    "buildTool": "maven",
+    "useSass": false,
+    "clientPackageManager": "npm",
+    "testFrameworks": [],
+    "enableTranslation": false,
+    "nativeLanguage": "en",
+    "languages": [
+      "en"
+    ],
+    "clientFramework": "angularX",
+    "jhiPrefix": "jhi",
+    "jhipsterVersion": "5.7.2",
+    "rememberMeKey": "109b4038e5d1dd6bf1794a5db290759c645575997da39a17ae2a415f5a518e2ea4d6ab88907849e149511089c194a3cd53de",
+    "otherModules": []
+  },
+  "git-provider": "GitHub",
+  "git-company": "diopahmadou",
+  "repository-name": "fenetre-pme-v2"
+}

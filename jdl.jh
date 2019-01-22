@@ -1,0 +1,76 @@
+entity Pme {
+	numeroDossier Integer required,
+    pmeName String required,
+    formeJuridique FormeJuridique required,
+    dateCreation LocalDate required,
+    dateEnregistrement LocalDate,
+    type String required,
+    activite String required,
+    clientel String required,
+    caPasse Double,
+    caPrevu Double
+}
+
+enum FormeJuridique{
+SARL, SURL, GIE, INFORMEL
+}
+
+entity Pret {
+	montant Long required,
+    etat EtatPret required,
+    taux Float required,
+    echeancier Integer,
+    garanties String
+}
+
+enum EtatPret{
+ACCORD, REFUS, ATTENTE
+}
+
+
+entity Projet {
+	investissementMateriel String,
+	fondRoulement Long,
+	organismesFinancement String
+}
+
+entity Fichier {
+	fileName String required,
+    fileType String required,
+    data AnyBlob required
+}
+
+
+entity Imf {
+	agrement String required
+	nom String required,
+	siegeSocial String,
+	registreCommerce String,
+	ninea String,
+	secteurActivite String,
+	formeJuridique String,
+	capital Long,
+	adresseAgence String,
+    telephone String required,
+    email String required pattern(/^[^@\s]+@[^@\s]+\.[^@\s]+$/),
+}
+
+entity ContactPme {
+	prenom String required,
+	nom String required,
+	email String required pattern(/^[^@\s]+@[^@\s]+\.[^@\s]+$/),
+	telephone String required,
+	fonction String required,
+	adresse String
+}
+
+relationship OneToMany {
+	Pme{personneContact} to ContactPme{pme},
+	Pme{pret} to Pret{pme},
+	Pme{projet} to Projet{pme},
+    Pret{fichier} to Fichier{pret},
+    Imf{pmeGere} to Pme{ImfGestionnaire}
+}
+service * with serviceClass
+paginate * with pagination
+

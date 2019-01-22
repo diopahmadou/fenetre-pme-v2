@@ -1,0 +1,69 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="pme">
+            <h2><span>Pme</span> {{pme.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span>Numero Dossier</span></dt>
+                <dd>
+                    <span>{{pme.numeroDossier}}</span>
+                </dd>
+                <dt><span>Pme Name</span></dt>
+                <dd>
+                    <span>{{pme.pmeName}}</span>
+                </dd>
+                <dt><span>Forme Juridique</span></dt>
+                <dd>
+                    <span>{{pme.formeJuridique}}</span>
+                </dd>
+                <dt><span>Date Creation</span></dt>
+                <dd>
+                    <span>{{pme.dateCreation}}</span>
+                </dd>
+                <dt><span>Date Enregistrement</span></dt>
+                <dd>
+                    <span>{{pme.dateEnregistrement}}</span>
+                </dd>
+                <dt><span>Type</span></dt>
+                <dd>
+                    <span>{{pme.type}}</span>
+                </dd>
+                <dt><span>Activite</span></dt>
+                <dd>
+                    <span>{{pme.activite}}</span>
+                </dd>
+                <dt><span>Clientel</span></dt>
+                <dd>
+                    <span>{{pme.clientel}}</span>
+                </dd>
+                <dt><span>Ca Passe</span></dt>
+                <dd>
+                    <span>{{pme.caPasse}}</span>
+                </dd>
+                <dt><span>Ca Prevu</span></dt>
+                <dd>
+                    <span>{{pme.caPrevu}}</span>
+                </dd>
+                <dt><span>Imf Gestionnaire</span></dt>
+                <dd>
+                    <div *ngIf="pme.imfGestionnaire">
+                        <a [routerLink]="['/imf', pme.imfGestionnaire?.id, 'view']">{{pme.imfGestionnaire?.id}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/pme', pme.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

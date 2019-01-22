@@ -1,0 +1,58 @@
+{
+    "name": "Pret",
+    "fields": [
+        {
+            "fieldName": "montant",
+            "fieldType": "Long",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "etat",
+            "fieldType": "EtatPret",
+            "fieldValues": "ACCORD,REFUS,ATTENTE",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "taux",
+            "fieldType": "Float",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "echeancier",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "garanties",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "fichier",
+            "otherEntityName": "fichier",
+            "otherEntityRelationshipName": "pret"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "pme",
+            "otherEntityName": "pme",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20190119000353",
+    "entityTableName": "pret",
+    "dto": "no",
+    "pagination": "pagination",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

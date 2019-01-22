@@ -1,0 +1,41 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="projet">
+            <h2><span>Projet</span> {{projet.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span>Investissement Materiel</span></dt>
+                <dd>
+                    <span>{{projet.investissementMateriel}}</span>
+                </dd>
+                <dt><span>Fond Roulement</span></dt>
+                <dd>
+                    <span>{{projet.fondRoulement}}</span>
+                </dd>
+                <dt><span>Organismes Financement</span></dt>
+                <dd>
+                    <span>{{projet.organismesFinancement}}</span>
+                </dd>
+                <dt><span>Pme</span></dt>
+                <dd>
+                    <div *ngIf="projet.pme">
+                        <a [routerLink]="['/pme', projet.pme?.id, 'view']">{{projet.pme?.id}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/projet', projet.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

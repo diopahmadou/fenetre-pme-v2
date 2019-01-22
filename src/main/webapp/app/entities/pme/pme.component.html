@@ -1,0 +1,123 @@
+<div>
+    <h2 id="page-heading">
+        <span>Pmes</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-pme" [routerLink]="['/pme/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span>
+                Create new Pme
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="table-responsive" *ngIf="pmes">
+        <span class="mr-2 col-2">Filter by name</span>
+        <input type="search" class="form-control" [(ngModel)]="filter">
+        <table class="table table-striped">
+            <thead>
+                <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+                    <th jhiSortBy="id">
+                        <span>ID</span>
+                        <fa-icon [icon]="'sort'"></fa-icon>
+                    </th>
+                    <th jhiSortBy="numeroDossier">
+                        <span>Numero Dossier</span>
+                        <fa-icon [icon]="'sort'"></fa-icon>
+                    </th>
+                    <th jhiSortBy="pmeName">
+                        <span>Pme Name</span>
+                        <fa-icon [icon]="'sort'"></fa-icon>
+                    </th>
+                    <th jhiSortBy="formeJuridique">
+                        <span>Forme Juridique</span>
+                        <fa-icon [icon]="'sort'"></fa-icon>
+                    </th>
+                    <th jhiSortBy="dateCreation">
+                        <span>Date Creation</span>
+                        <fa-icon [icon]="'sort'"></fa-icon>
+                    </th>
+                    <th jhiSortBy="dateEnregistrement">
+                        <span>Date Enregistrement</span>
+                        <fa-icon [icon]="'sort'"></fa-icon>
+                    </th>
+                    <th jhiSortBy="type">
+                        <span>Type</span>
+                        <fa-icon [icon]="'sort'"></fa-icon>
+                    </th>
+                    <th jhiSortBy="activite">
+                        <span>Activite</span>
+                        <fa-icon [icon]="'sort'"></fa-icon>
+                    </th>
+                    <th jhiSortBy="clientel">
+                        <span>Clientel</span>
+                        <fa-icon [icon]="'sort'"></fa-icon>
+                    </th>
+                    <th jhiSortBy="caPasse">
+                        <span>Ca Passe</span>
+                        <fa-icon [icon]="'sort'"></fa-icon>
+                    </th>
+                    <th jhiSortBy="caPrevu">
+                        <span>Ca Prevu</span>
+                        <fa-icon [icon]="'sort'"></fa-icon>
+                    </th>
+                    <th jhiSortBy="imfGestionnaire.id">
+                        <span>Imf Gestionnaire</span>
+                        <fa-icon [icon]="'sort'"></fa-icon>
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let pme of (pmes | pureFilter:filter:'pmeName');trackBy: trackId">
+                    <td>
+                        <a [routerLink]="['/pme', pme.id, 'view' ]">{{pme.id}}</a>
+                    </td>
+                    <td>{{pme.numeroDossier}}</td>
+                    <td>{{pme.pmeName}}</td>
+                    <td>{{pme.formeJuridique}}</td>
+                    <td>{{pme.dateCreation | date:'mediumDate'}}</td>
+                    <td>{{pme.dateEnregistrement | date:'mediumDate'}}</td>
+                    <td>{{pme.type}}</td>
+                    <td>{{pme.activite}}</td>
+                    <td>{{pme.clientel}}</td>
+                    <td>{{pme.caPasse}}</td>
+                    <td>{{pme.caPrevu}}</td>
+                    <td>
+                        <div *ngIf="pme.imfGestionnaire">
+                            <a [routerLink]="['../imf', pme.imfGestionnaire?.id, 'view' ]">{{pme.imfGestionnaire?.id}}</a>
+                        </div>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit" [routerLink]="['/pme', pme.id, 'view' ]" class="btn btn-info btn-sm">
+                                <fa-icon [icon]="'eye'"></fa-icon>
+                                <span class="d-none d-md-inline">View</span>
+                            </button>
+                            <button type="submit" [routerLink]="['/pme', pme.id, 'edit']" class="btn btn-primary btn-sm">
+                                <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                                <span class="d-none d-md-inline">Edit</span>
+                            </button>
+                            <div *jhiHasAnyAuthority="'ROLE_ADMIN'">
+                                <button type="submit" [routerLink]="['/', { outlets: { popup: 'pme/'+ pme.id + '/delete'} }]" replaceUrl="true" queryParamsHandling="merge"
+                                    class="btn btn-danger btn-sm">
+                                    <fa-icon [icon]="'times'"></fa-icon>
+                                    <span class="d-none d-md-inline">Delete</span>
+                                </button>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div *ngIf="pmes && pmes.length">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true"
+                (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
+    </div>
+</div>
+

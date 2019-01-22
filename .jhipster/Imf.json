@@ -1,0 +1,80 @@
+{
+    "name": "Imf",
+    "fields": [
+        {
+            "fieldName": "agrement",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "nom",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "siegeSocial",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "registreCommerce",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "ninea",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "secteurActivite",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "formeJuridique",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "capital",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "adresseAgence",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "telephone",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "email",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "pattern"
+            ],
+            "fieldValidateRulesPattern": "^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "pmeGere",
+            "otherEntityName": "pme",
+            "otherEntityRelationshipName": "imfGestionnaire"
+        }
+    ],
+    "changelogDate": "20190119000356",
+    "entityTableName": "imf",
+    "dto": "no",
+    "pagination": "pagination",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

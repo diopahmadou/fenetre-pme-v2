@@ -1,0 +1,107 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-imf-heading">Create or edit a Imf</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!imf.id">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="imf.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_agrement">Agrement</label>
+                    <input type="text" class="form-control" name="agrement" id="field_agrement"
+                        [(ngModel)]="imf.agrement" required/>
+                    <div [hidden]="!(editForm.controls.agrement?.dirty && editForm.controls.agrement?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.agrement?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_nom">Nom</label>
+                    <input type="text" class="form-control" name="nom" id="field_nom"
+                        [(ngModel)]="imf.nom" required/>
+                    <div [hidden]="!(editForm.controls.nom?.dirty && editForm.controls.nom?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.nom?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_siegeSocial">Siege Social</label>
+                    <input type="text" class="form-control" name="siegeSocial" id="field_siegeSocial"
+                        [(ngModel)]="imf.siegeSocial" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_registreCommerce">Registre Commerce</label>
+                    <input type="text" class="form-control" name="registreCommerce" id="field_registreCommerce"
+                        [(ngModel)]="imf.registreCommerce" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_ninea">Ninea</label>
+                    <input type="text" class="form-control" name="ninea" id="field_ninea"
+                        [(ngModel)]="imf.ninea" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_secteurActivite">Secteur Activite</label>
+                    <input type="text" class="form-control" name="secteurActivite" id="field_secteurActivite"
+                        [(ngModel)]="imf.secteurActivite" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_formeJuridique">Forme Juridique</label>
+                    <input type="text" class="form-control" name="formeJuridique" id="field_formeJuridique"
+                        [(ngModel)]="imf.formeJuridique" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_capital">Capital</label>
+                    <input type="number" class="form-control" name="capital" id="field_capital"
+                        [(ngModel)]="imf.capital" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_adresseAgence">Adresse Agence</label>
+                    <input type="text" class="form-control" name="adresseAgence" id="field_adresseAgence"
+                        [(ngModel)]="imf.adresseAgence" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_telephone">Telephone</label>
+                    <input type="text" class="form-control" name="telephone" id="field_telephone"
+                        [(ngModel)]="imf.telephone" required/>
+                    <div [hidden]="!(editForm.controls.telephone?.dirty && editForm.controls.telephone?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.telephone?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_email">Email</label>
+                    <input type="text" class="form-control" name="email" id="field_email"
+                        [(ngModel)]="imf.email" required pattern="^[^@\s]+@[^@\s]+\.[^@\s]+$"/>
+                    <div [hidden]="!(editForm.controls.email?.dirty && editForm.controls.email?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.email?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.email?.errors?.pattern">
+                            This field should follow pattern for "Email".
+                        </small>
+                    </div>
+                </div>
+
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span>Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span>Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

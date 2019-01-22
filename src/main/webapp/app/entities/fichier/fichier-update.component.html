@@ -1,0 +1,77 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-fichier-heading">Create or edit a Fichier</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!fichier.id">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="fichier.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_fileName">File Name</label>
+                    <input type="text" class="form-control" name="fileName" id="field_fileName"
+                        [(ngModel)]="fichier.fileName" required/>
+                    <div [hidden]="!(editForm.controls.fileName?.dirty && editForm.controls.fileName?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.fileName?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_fileType">File Type</label>
+                    <input type="text" class="form-control" name="fileType" id="field_fileType"
+                        [(ngModel)]="fichier.fileType" required/>
+                    <div [hidden]="!(editForm.controls.fileType?.dirty && editForm.controls.fileType?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.fileType?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_data">Data</label>
+                    <div>
+                        <div *ngIf="fichier.data" class="form-text text-danger clearfix">
+                            <a class="pull-left" (click)="openFile(fichier.dataContentType, fichier.data)">open</a><br>
+                            <span class="pull-left">{{fichier.dataContentType}}, {{byteSize(fichier.data)}}</span>
+                            <button type="button" (click)="fichier.data=null;fichier.dataContentType=null;"
+                                    class="btn btn-secondary btn-xs pull-right">
+                                <fa-icon [icon]="'times'"></fa-icon>
+                            </button>
+                        </div>
+                        <input type="file" id="file_data" (change)="setFileData($event, fichier, 'data', false)"/>
+                    </div>
+                    <input type="hidden" class="form-control" name="data" id="field_data"
+                        [(ngModel)]="fichier.data" required/>
+                    <input type="hidden" class="form-control" name="dataContentType" id="field_dataContentType"
+                        [(ngModel)]="fichier.dataContentType" />
+                    <div [hidden]="!(editForm.controls.data?.dirty && editForm.controls.data?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.data?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_pret">Pret</label>
+                    <select class="form-control" id="field_pret" name="pret" [(ngModel)]="fichier.pret" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="pretOption.id === fichier.pret?.id ? fichier.pret : pretOption" *ngFor="let pretOption of prets; trackBy: trackPretById">{{pretOption.id}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span>Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span>Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

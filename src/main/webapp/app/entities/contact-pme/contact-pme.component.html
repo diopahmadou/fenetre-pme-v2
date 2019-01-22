@@ -1,0 +1,82 @@
+<div>
+    <h2 id="page-heading">
+        <span>Contact Pmes</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-contact-pme" [routerLink]="['/contact-pme/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span >
+            Create new Contact Pme
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="table-responsive" *ngIf="contactPmes">
+        <span class="mr-2 col-2">Filter by prenom</span>
+        <input type="search" class="form-control" [(ngModel)]="filter">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th jhiSortBy="id"><span>ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="prenom"><span>Prenom</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="nom"><span>Nom</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="email"><span>Email</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="telephone"><span>Telephone</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="fonction"><span>Fonction</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="adresse"><span>Adresse</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="pme.id"><span>Pme</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let contactPme of (contactPmes | pureFilter:filter:'prenom');trackBy: trackId">
+                <td><a [routerLink]="['/contact-pme', contactPme.id, 'view' ]">{{contactPme.id}}</a></td>
+                <td>{{contactPme.prenom}}</td>
+                <td>{{contactPme.nom}}</td>
+                <td>{{contactPme.email}}</td>
+                <td>{{contactPme.telephone}}</td>
+                <td>{{contactPme.fonction}}</td>
+                <td>{{contactPme.adresse}}</td>
+                <td>
+                    <div *ngIf="contactPme.pme">
+                        <a [routerLink]="['../pme', contactPme.pme?.id, 'view' ]" >{{contactPme.pme?.id}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['/contact-pme', contactPme.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/contact-pme', contactPme.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline">Edit</span>
+                        </button>
+                        <div *jhiHasAnyAuthority="'ROLE_ADMIN'">
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'contact-pme/'+ contactPme.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline">Delete</span>
+                        </button>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div *ngIf="contactPmes && contactPmes.length">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
+    </div>
+</div>

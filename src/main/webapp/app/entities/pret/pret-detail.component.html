@@ -1,0 +1,49 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="pret">
+            <h2><span>Pret</span> {{pret.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span>Montant</span></dt>
+                <dd>
+                    <span>{{pret.montant}}</span>
+                </dd>
+                <dt><span>Etat</span></dt>
+                <dd>
+                    <span>{{pret.etat}}</span>
+                </dd>
+                <dt><span>Taux</span></dt>
+                <dd>
+                    <span>{{pret.taux}}</span>
+                </dd>
+                <dt><span>Echeancier</span></dt>
+                <dd>
+                    <span>{{pret.echeancier}}</span>
+                </dd>
+                <dt><span>Garanties</span></dt>
+                <dd>
+                    <span>{{pret.garanties}}</span>
+                </dd>
+                <dt><span>Pme</span></dt>
+                <dd>
+                    <div *ngIf="pret.pme">
+                        <a [routerLink]="['/pme', pret.pme?.id, 'view']">{{pret.pme?.id}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/pret', pret.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

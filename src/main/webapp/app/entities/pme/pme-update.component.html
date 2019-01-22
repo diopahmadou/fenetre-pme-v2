@@ -1,0 +1,141 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-pme-heading">Create or edit a Pme</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!pme.id">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="pme.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_numeroDossier">Numero Dossier</label>
+                    <input type="number" class="form-control" name="numeroDossier" id="field_numeroDossier"
+                        [(ngModel)]="pme.numeroDossier" required/>
+                    <div [hidden]="!(editForm.controls.numeroDossier?.dirty && editForm.controls.numeroDossier?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.numeroDossier?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.numeroDossier?.errors?.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_pmeName">Pme Name</label>
+                    <input type="text" class="form-control" name="pmeName" id="field_pmeName"
+                        [(ngModel)]="pme.pmeName" required/>
+                    <div [hidden]="!(editForm.controls.pmeName?.dirty && editForm.controls.pmeName?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.pmeName?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_formeJuridique">Forme Juridique</label>
+                    <select class="form-control" name="formeJuridique" [(ngModel)]="pme.formeJuridique" id="field_formeJuridique"  required>
+                        <option value="SARL">SARL</option>
+                        <option value="SURL">SURL</option>
+                        <option value="GIE">GIE</option>
+                        <option value="INFORMEL">INFORMEL</option>
+                    </select>
+                    <div [hidden]="!(editForm.controls.formeJuridique?.dirty && editForm.controls.formeJuridique?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.formeJuridique?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_dateCreation">Date Creation</label>
+                    <div class="input-group">
+                        <input id="field_dateCreation" type="text" class="form-control" name="dateCreation" ngbDatepicker  #dateCreationDp="ngbDatepicker" [(ngModel)]="pme.dateCreation"
+                        required/>
+                        <span class="input-group-append">
+                            <button type="button" class="btn btn-secondary" (click)="dateCreationDp.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
+                        </span>
+                    </div>
+                    <div [hidden]="!(editForm.controls.dateCreation?.dirty && editForm.controls.dateCreation?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.dateCreation?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_dateEnregistrement">Date Enregistrement</label>
+                    <div class="input-group">
+                        <input id="field_dateEnregistrement" type="text" class="form-control" name="dateEnregistrement" ngbDatepicker  #dateEnregistrementDp="ngbDatepicker" [(ngModel)]="pme.dateEnregistrement"
+                        />
+                        <span class="input-group-append">
+                            <button type="button" class="btn btn-secondary" (click)="dateEnregistrementDp.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_type">Type</label>
+                    <input type="text" class="form-control" name="type" id="field_type"
+                        [(ngModel)]="pme.type" required/>
+                    <div [hidden]="!(editForm.controls.type?.dirty && editForm.controls.type?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.type?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_activite">Activite</label>
+                    <input type="text" class="form-control" name="activite" id="field_activite"
+                        [(ngModel)]="pme.activite" required/>
+                    <div [hidden]="!(editForm.controls.activite?.dirty && editForm.controls.activite?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.activite?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_clientel">Clientel</label>
+                    <input type="text" class="form-control" name="clientel" id="field_clientel"
+                        [(ngModel)]="pme.clientel" required/>
+                    <div [hidden]="!(editForm.controls.clientel?.dirty && editForm.controls.clientel?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.clientel?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_caPasse">Ca Passe</label>
+                    <input type="number" class="form-control" name="caPasse" id="field_caPasse"
+                        [(ngModel)]="pme.caPasse" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_caPrevu">Ca Prevu</label>
+                    <input type="number" class="form-control" name="caPrevu" id="field_caPrevu"
+                        [(ngModel)]="pme.caPrevu" />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_imfGestionnaire">Imf Gestionnaire</label>
+                    <select class="form-control" id="field_imfGestionnaire" name="imfGestionnaire" [(ngModel)]="pme.imfGestionnaire" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="imfOption.id === pme.imfGestionnaire?.id ? pme.imfGestionnaire : imfOption" *ngFor="let imfOption of imfs; trackBy: trackImfById">{{imfOption.id}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span>Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span>Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

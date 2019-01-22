@@ -1,0 +1,85 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-pret-heading">Create or edit a Pret</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!pret.id">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="pret.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_montant">Montant</label>
+                    <input type="number" class="form-control" name="montant" id="field_montant"
+                        [(ngModel)]="pret.montant" required/>
+                    <div [hidden]="!(editForm.controls.montant?.dirty && editForm.controls.montant?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.montant?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.montant?.errors?.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_etat">Etat</label>
+                    <select class="form-control" name="etat" [(ngModel)]="pret.etat" id="field_etat"  required>
+                        <option value="ACCORD">ACCORD</option>
+                        <option value="REFUS">REFUS</option>
+                        <option value="ATTENTE">ATTENTE</option>
+                    </select>
+                    <div [hidden]="!(editForm.controls.etat?.dirty && editForm.controls.etat?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.etat?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_taux">Taux</label>
+                    <input type="number" class="form-control" name="taux" id="field_taux"
+                        [(ngModel)]="pret.taux" required/>
+                    <div [hidden]="!(editForm.controls.taux?.dirty && editForm.controls.taux?.invalid)">
+                        <small class="form-text text-danger"
+                        [hidden]="!editForm.controls.taux?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.controls.taux?.errors?.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_echeancier">Echeancier</label>
+                    <input type="number" class="form-control" name="echeancier" id="field_echeancier"
+                        [(ngModel)]="pret.echeancier" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_garanties">Garanties</label>
+                    <input type="text" class="form-control" name="garanties" id="field_garanties"
+                        [(ngModel)]="pret.garanties" />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_pme">Pme</label>
+                    <select class="form-control" id="field_pme" name="pme" [(ngModel)]="pret.pme" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="pmeOption.id === pret.pme?.id ? pret.pme : pmeOption" *ngFor="let pmeOption of pmes; trackBy: trackPmeById">{{pmeOption.id}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span>Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span>Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

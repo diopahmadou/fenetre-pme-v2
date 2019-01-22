@@ -40,6 +40,17 @@ public class CacheConfiguration {
             cm.createCache(com.solenboutique.fenetre_pme_v2.domain.User.class.getName() + ".authorities", jcacheConfiguration);
             cm.createCache(com.solenboutique.fenetre_pme_v2.domain.PersistentToken.class.getName(), jcacheConfiguration);
             cm.createCache(com.solenboutique.fenetre_pme_v2.domain.User.class.getName() + ".persistentTokens", jcacheConfiguration);
+            cm.createCache(com.solenboutique.fenetre_pme_v2.domain.Pme.class.getName(), jcacheConfiguration);
+            cm.createCache(com.solenboutique.fenetre_pme_v2.domain.Pme.class.getName() + ".personneContacts", jcacheConfiguration);
+            cm.createCache(com.solenboutique.fenetre_pme_v2.domain.Pme.class.getName() + ".prets", jcacheConfiguration);
+            cm.createCache(com.solenboutique.fenetre_pme_v2.domain.Pme.class.getName() + ".projets", jcacheConfiguration);
+            cm.createCache(com.solenboutique.fenetre_pme_v2.domain.Pret.class.getName(), jcacheConfiguration);
+            cm.createCache(com.solenboutique.fenetre_pme_v2.domain.Pret.class.getName() + ".fichiers", jcacheConfiguration);
+            cm.createCache(com.solenboutique.fenetre_pme_v2.domain.Projet.class.getName(), jcacheConfiguration);
+            cm.createCache(com.solenboutique.fenetre_pme_v2.domain.Fichier.class.getName(), jcacheConfiguration);
+            cm.createCache(com.solenboutique.fenetre_pme_v2.domain.Imf.class.getName(), jcacheConfiguration);
+            cm.createCache(com.solenboutique.fenetre_pme_v2.domain.Imf.class.getName() + ".pmeGeres", jcacheConfiguration);
+            cm.createCache(com.solenboutique.fenetre_pme_v2.domain.ContactPme.class.getName(), jcacheConfiguration);
             // jhipster-needle-ehcache-add-entry
         };
     }

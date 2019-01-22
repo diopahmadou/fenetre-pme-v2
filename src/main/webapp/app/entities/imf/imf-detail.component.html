@@ -1,0 +1,67 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="imf">
+            <h2><span>Imf</span> {{imf.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span>Agrement</span></dt>
+                <dd>
+                    <span>{{imf.agrement}}</span>
+                </dd>
+                <dt><span>Nom</span></dt>
+                <dd>
+                    <span>{{imf.nom}}</span>
+                </dd>
+                <dt><span>Siege Social</span></dt>
+                <dd>
+                    <span>{{imf.siegeSocial}}</span>
+                </dd>
+                <dt><span>Registre Commerce</span></dt>
+                <dd>
+                    <span>{{imf.registreCommerce}}</span>
+                </dd>
+                <dt><span>Ninea</span></dt>
+                <dd>
+                    <span>{{imf.ninea}}</span>
+                </dd>
+                <dt><span>Secteur Activite</span></dt>
+                <dd>
+                    <span>{{imf.secteurActivite}}</span>
+                </dd>
+                <dt><span>Forme Juridique</span></dt>
+                <dd>
+                    <span>{{imf.formeJuridique}}</span>
+                </dd>
+                <dt><span>Capital</span></dt>
+                <dd>
+                    <span>{{imf.capital}}</span>
+                </dd>
+                <dt><span>Adresse Agence</span></dt>
+                <dd>
+                    <span>{{imf.adresseAgence}}</span>
+                </dd>
+                <dt><span>Telephone</span></dt>
+                <dd>
+                    <span>{{imf.telephone}}</span>
+                </dd>
+                <dt><span>Email</span></dt>
+                <dd>
+                    <span>{{imf.email}}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/imf', imf.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

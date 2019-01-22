@@ -1,0 +1,79 @@
+<div>
+    <h2 id="page-heading">
+        <span>Fichiers</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-fichier" [routerLink]="['/fichier/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span >
+            Create new Fichier
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="table-responsive" *ngIf="fichiers">
+        <span class="mr-2 col-2">Filter by name</span>
+        <input type="search" class="form-control" [(ngModel)]="filter">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th jhiSortBy="id"><span>ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="fileName"><span>File Name</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="fileType"><span>File Type</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="data"><span>Data</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="pret.id"><span>Pret</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let fichier of (fichiers | pureFilter:filter:'fileName') ;trackBy: trackId">
+                <td><a [routerLink]="['/fichier', fichier.id, 'view' ]">{{fichier.id}}</a></td>
+                <td>{{fichier.fileName}}</td>
+                <td>{{fichier.fileType}}</td>
+                <td>
+                    <a *ngIf="fichier.data" (click)="openFile(fichier.dataContentType, fichier.data)">open</a>
+                    <span *ngIf="fichier.data">{{fichier.dataContentType}}, {{byteSize(fichier.data)}}</span>
+                </td>
+                <td>
+                    <div *ngIf="fichier.pret">
+                        <a [routerLink]="['../pret', fichier.pret?.id, 'view' ]" >{{fichier.pret?.id}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['/fichier', fichier.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/fichier', fichier.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline">Edit</span>
+                        </button>
+                        <div *jhiHasAnyAuthority="'ROLE_ADMIN'">
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'fichier/'+ fichier.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline">Delete</span>
+                        </button>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div *ngIf="fichiers && fichiers.length">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
+    </div>
+</div>

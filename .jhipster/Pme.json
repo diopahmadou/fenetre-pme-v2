@@ -1,0 +1,102 @@
+{
+    "name": "Pme",
+    "fields": [
+        {
+            "fieldName": "numeroDossier",
+            "fieldType": "Integer",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "pmeName",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "formeJuridique",
+            "fieldType": "FormeJuridique",
+            "fieldValues": "SARL,SURL,GIE,INFORMEL",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "dateCreation",
+            "fieldType": "LocalDate",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "dateEnregistrement",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "type",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "activite",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "clientel",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "caPasse",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "caPrevu",
+            "fieldType": "Double"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "personneContact",
+            "otherEntityName": "contactPme",
+            "otherEntityRelationshipName": "pme"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "pret",
+            "otherEntityName": "pret",
+            "otherEntityRelationshipName": "pme"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "projet",
+            "otherEntityName": "projet",
+            "otherEntityRelationshipName": "pme"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "imfGestionnaire",
+            "otherEntityName": "imf",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20190119000352",
+    "entityTableName": "pme",
+    "dto": "no",
+    "pagination": "pagination",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

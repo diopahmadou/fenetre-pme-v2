@@ -1,0 +1,78 @@
+<div>
+    <h2 id="page-heading">
+        <span>Prets</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-pret" [routerLink]="['/pret/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span >
+            Create new Pret
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="table-responsive" *ngIf="prets">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th jhiSortBy="id"><span>ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="montant"><span>Montant</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="etat"><span>Etat</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="taux"><span>Taux</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="echeancier"><span>Echeancier</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="garanties"><span>Garanties</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="pme.id"><span>Pme</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let pret of prets ;trackBy: trackId">
+                <td><a [routerLink]="['/pret', pret.id, 'view' ]">{{pret.id}}</a></td>
+                <td>{{pret.montant}}</td>
+                <td>{{pret.etat}}</td>
+                <td>{{pret.taux}}</td>
+                <td>{{pret.echeancier}}</td>
+                <td>{{pret.garanties}}</td>
+                <td>
+                    <div *ngIf="pret.pme">
+                        <a [routerLink]="['../pme', pret.pme?.id, 'view' ]" >{{pret.pme?.id}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['/pret', pret.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/pret', pret.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline">Edit</span>
+                        </button>
+                        <div *jhiHasAnyAuthority="'ROLE_ADMIN'">
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'pret/'+ pret.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline">Delete</span>
+                        </button>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div *ngIf="prets && prets.length">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
+    </div>
+</div>

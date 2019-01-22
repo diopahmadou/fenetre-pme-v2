@@ -1,0 +1,44 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="fichier">
+            <h2><span>Fichier</span> {{fichier.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span>File Name</span></dt>
+                <dd>
+                    <span>{{fichier.fileName}}</span>
+                </dd>
+                <dt><span>File Type</span></dt>
+                <dd>
+                    <span>{{fichier.fileType}}</span>
+                </dd>
+                <dt><span>Data</span></dt>
+                <dd>
+                    <div *ngIf="fichier.data">
+                        <a (click)="openFile(fichier.dataContentType, fichier.data)">open</a>
+                        {{fichier.dataContentType}}, {{byteSize(fichier.data)}}
+                    </div>
+                </dd>
+                <dt><span>Pret</span></dt>
+                <dd>
+                    <div *ngIf="fichier.pret">
+                        <a [routerLink]="['/pret', fichier.pret?.id, 'view']">{{fichier.pret?.id}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/fichier', fichier.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

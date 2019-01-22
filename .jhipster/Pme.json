@@ -87,7 +87,7 @@
             "relationshipType": "many-to-one",
             "relationshipName": "imfGestionnaire",
             "otherEntityName": "imf",
-            "otherEntityField": "id"
+            "otherEntityField": "nom"
         }
     ],
     "changelogDate": "20190119000352",

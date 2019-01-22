@@ -43,7 +43,7 @@
             "relationshipType": "many-to-one",
             "relationshipName": "pme",
             "otherEntityName": "pme",
-            "otherEntityField": "id"
+            "otherEntityField": "pmeName"
         }
     ],
     "changelogDate": "20190119000353",

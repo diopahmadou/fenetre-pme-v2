@@ -52,7 +52,7 @@ entity Imf {
 	capital Long,
 	adresseAgence String,
     telephone String required,
-    email String required pattern(/^[^@\s]+@[^@\s]+\.[^@\s]+$/),
+    email String required pattern(/^[^@\s]+@[^@\s]+\.[^@\s]+$/)
 }
 
 entity ContactPme {
@@ -65,11 +65,11 @@ entity ContactPme {
 }
 
 relationship OneToMany {
-	Pme{personneContact} to ContactPme{pme},
-	Pme{pret} to Pret{pme},
-	Pme{projet} to Projet{pme},
+	Pme{personneContact} to ContactPme{pme(pmeName)},
+	Pme{pret} to Pret{pme(pmeName)},
+	Pme{projet} to Projet{pme(pmeName)},
     Pret{fichier} to Fichier{pret},
-    Imf{pmeGere} to Pme{ImfGestionnaire}
+    Imf{pmeGere} to Pme{ImfGestionnaire(nom)}
 }
 service * with serviceClass
 paginate * with pagination

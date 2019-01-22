@@ -20,7 +20,7 @@
                 <dt><span>Pme</span></dt>
                 <dd>
                     <div *ngIf="projet.pme">
-                        <a [routerLink]="['/pme', projet.pme?.id, 'view']">{{projet.pme?.id}}</a>
+                        <a [routerLink]="['/pme', projet.pme?.id, 'view']">{{projet.pme?.pmeName}}</a>
                     </div>
                 </dd>
             </dl>

@@ -29,7 +29,7 @@
                     <label class="form-control-label" for="field_pme">Pme</label>
                     <select class="form-control" id="field_pme" name="pme" [(ngModel)]="projet.pme" >
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="pmeOption.id === projet.pme?.id ? projet.pme : pmeOption" *ngFor="let pmeOption of pmes; trackBy: trackPmeById">{{pmeOption.id}}</option>
+                        <option [ngValue]="pmeOption.id === projet.pme?.id ? projet.pme : pmeOption" *ngFor="let pmeOption of pmes; trackBy: trackPmeById">{{pmeOption.pmeName}}</option>
                     </select>
                 </div>
             </div>

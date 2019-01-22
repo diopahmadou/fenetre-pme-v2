@@ -32,7 +32,7 @@
                 <dt><span>Pme</span></dt>
                 <dd>
                     <div *ngIf="contactPme.pme">
-                        <a [routerLink]="['/pme', contactPme.pme?.id, 'view']">{{contactPme.pme?.id}}</a>
+                        <a [routerLink]="['/pme', contactPme.pme?.id, 'view']">{{contactPme.pme?.pmeName}}</a>
                     </div>
                 </dd>
             </dl>

@@ -48,7 +48,7 @@
                 <dt><span>Imf Gestionnaire</span></dt>
                 <dd>
                     <div *ngIf="pme.imfGestionnaire">
-                        <a [routerLink]="['/imf', pme.imfGestionnaire?.id, 'view']">{{pme.imfGestionnaire?.id}}</a>
+                        <a [routerLink]="['/imf', pme.imfGestionnaire?.id, 'view']">{{pme.imfGestionnaire?.nom}}</a>
                     </div>
                 </dd>
             </dl>

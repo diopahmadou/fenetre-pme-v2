@@ -11,8 +11,6 @@
     <jhi-alert></jhi-alert>
     <br/>
     <div class="table-responsive" *ngIf="contactPmes">
-        <span class="mr-2 col-2">Filter by prenom</span>
-        <input type="search" class="form-control" [(ngModel)]="filter">
         <table class="table table-striped">
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
@@ -23,12 +21,12 @@
             <th jhiSortBy="telephone"><span>Telephone</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="fonction"><span>Fonction</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="adresse"><span>Adresse</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="pme.id"><span>Pme</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="pme.pmeName"><span>Pme</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th></th>
             </tr>
             </thead>
             <tbody>
-            <tr *ngFor="let contactPme of (contactPmes | pureFilter:filter:'prenom');trackBy: trackId">
+            <tr *ngFor="let contactPme of contactPmes ;trackBy: trackId">
                 <td><a [routerLink]="['/contact-pme', contactPme.id, 'view' ]">{{contactPme.id}}</a></td>
                 <td>{{contactPme.prenom}}</td>
                 <td>{{contactPme.nom}}</td>
@@ -38,7 +36,7 @@
                 <td>{{contactPme.adresse}}</td>
                 <td>
                     <div *ngIf="contactPme.pme">
-                        <a [routerLink]="['../pme', contactPme.pme?.id, 'view' ]" >{{contactPme.pme?.id}}</a>
+                        <a [routerLink]="['../pme', contactPme.pme?.id, 'view' ]" >{{contactPme.pme?.pmeName}}</a>
                     </div>
                 </td>
                 <td class="text-right">
@@ -55,7 +53,6 @@
                             <fa-icon [icon]="'pencil-alt'"></fa-icon>
                             <span class="d-none d-md-inline">Edit</span>
                         </button>
-                        <div *jhiHasAnyAuthority="'ROLE_ADMIN'">
                         <button type="submit"
                                 [routerLink]="['/', { outlets: { popup: 'contact-pme/'+ contactPme.id + '/delete'} }]"
                                 replaceUrl="true"
@@ -64,7 +61,6 @@
                             <fa-icon [icon]="'times'"></fa-icon>
                             <span class="d-none d-md-inline">Delete</span>
                         </button>
-                        </div>
                     </div>
                 </td>
             </tr>

@@ -124,7 +124,7 @@
                     <label class="form-control-label" for="field_imfGestionnaire">Imf Gestionnaire</label>
                     <select class="form-control" id="field_imfGestionnaire" name="imfGestionnaire" [(ngModel)]="pme.imfGestionnaire" >
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="imfOption.id === pme.imfGestionnaire?.id ? pme.imfGestionnaire : imfOption" *ngFor="let imfOption of imfs; trackBy: trackImfById">{{imfOption.id}}</option>
+                        <option [ngValue]="imfOption.id === pme.imfGestionnaire?.id ? pme.imfGestionnaire : imfOption" *ngFor="let imfOption of imfs; trackBy: trackImfById">{{imfOption.nom}}</option>
                     </select>
                 </div>
             </div>

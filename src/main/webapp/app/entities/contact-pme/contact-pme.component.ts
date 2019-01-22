@@ -29,7 +29,6 @@ export class ContactPmeComponent implements OnInit, OnDestroy {
     predicate: any;
     previousPage: any;
     reverse: any;
-    filter: string;
 
     constructor(
         protected contactPmeService: ContactPmeService,

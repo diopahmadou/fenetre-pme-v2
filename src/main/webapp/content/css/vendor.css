@@ -1,2 +1,4 @@
 /* after changing this file run 'npm run webpack:build' */
+@import '/node_modules/bootswatch/dist/materia/_variables.scss';
 @import '~bootstrap/dist/css/bootstrap.min.css';
+@import '/node_modules/bootswatch/dist/materia/_bootswatch.scss';

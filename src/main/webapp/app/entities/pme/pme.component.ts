@@ -29,6 +29,7 @@ export class PmeComponent implements OnInit, OnDestroy {
     predicate: any;
     previousPage: any;
     reverse: any;
+    filter: string;
 
     constructor(
         protected pmeService: PmeService,

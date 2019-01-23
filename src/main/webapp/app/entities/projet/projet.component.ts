@@ -29,6 +29,7 @@ export class ProjetComponent implements OnInit, OnDestroy {
     predicate: any;
     previousPage: any;
     reverse: any;
+    filter: string;
 
     constructor(
         protected projetService: ProjetService,

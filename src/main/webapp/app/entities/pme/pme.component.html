@@ -11,6 +11,8 @@
     <jhi-alert></jhi-alert>
     <br/>
     <div class="table-responsive" *ngIf="pmes">
+            <span class="mr-2 col-2">Filter by nom</span>
+            <input type="search" class="form-control" [(ngModel)]="filter">
         <table class="table table-striped">
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
@@ -30,7 +32,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr *ngFor="let pme of pmes ;trackBy: trackId">
+            <tr *ngFor="let pme of (pmes | pureFilter:filter:'pmeName') ;trackBy: trackId">
                 <td><a [routerLink]="['/pme', pme.id, 'view' ]">{{pme.id}}</a></td>
                 <td>{{pme.numeroDossier}}</td>
                 <td>{{pme.pmeName}}</td>
@@ -61,6 +63,7 @@
                             <fa-icon [icon]="'pencil-alt'"></fa-icon>
                             <span class="d-none d-md-inline">Edit</span>
                         </button>
+                        <div *jhiHasAnyAuthority="'ROLE_ADMIN'">
                         <button type="submit"
                                 [routerLink]="['/', { outlets: { popup: 'pme/'+ pme.id + '/delete'} }]"
                                 replaceUrl="true"
@@ -69,6 +72,7 @@
                             <fa-icon [icon]="'times'"></fa-icon>
                             <span class="d-none d-md-inline">Delete</span>
                         </button>
+                    </div>
                     </div>
                 </td>
             </tr>
